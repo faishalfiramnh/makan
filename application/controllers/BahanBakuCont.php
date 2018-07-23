@@ -16,16 +16,16 @@ class BahanBakuCont extends CI_Controller{
 
      public function list()
      {
-       $this->load->model('BahanBakuModel');
-       $dataBahan['Bahan']=$this->BahanBakuModel->listBahan();
-       $dataBahan['BhnBaru']=$this->BahanBakuModel->bahanJumlah();
-       $this->load->view('BahanBaku/ListBahanBakuView', $dataBahan);
+       $this->load->model('BhnBakuModel');
+       $dataBahan['Bahan']=$this->BhnBakuModel->listBahan();
+       // $dataBahan['BhnBaru']=$this->BahanBakuModel->bahanJumlah();
+       $this->load->view('BahanBaku0/ListBahanBakuView', $dataBahan);
      }
 
      public function listBaru()
      {
-       $this->load->model('BahanBakuModel');
-       $dataBahan['BhnBaru']=$this->BahanBakuModel->bahanJumlah();
+       $this->load->model('BhaBakuModel');
+       $dataBahan['BhnBaru']=$this->BhnBakuModel->bahanJumlah();
        $this->load->view('BahanBaku/QueryBahan', $dataBahan);
      }
 
@@ -42,7 +42,7 @@ class BahanBakuCont extends CI_Controller{
 			if ($this->form_validation->run()==false)
 			{
 				//$this->load->view('boot');
-				$this->load->view('bahanbaku/bahanbaku_list');
+				$this->load->view('BahanBaku/TambahBahanView2');
 			}
 			else
 			{

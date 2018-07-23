@@ -101,6 +101,31 @@ class Pelanggan_model extends CI_Model
 
       	}
 
+        // function logged_id()
+        // {
+        //     return $this->session->userdata('user_id');
+        // }
+        //
+        // //fungsi check login
+        // function check_login($table, $field1, $field2)
+        // {
+        //     $this->db->select('*');
+        //     $this->db->from('p');
+        //     $this->db->where($field1);
+        //     $this->db->where($field2);
+        //     $this->db->limit(1);
+        //     $query = $this->db->get();
+        //     if ($query->num_rows() == 0) {
+        //         return FALSE;
+        //     } else {
+        //         return $query->result();
+        //     }
+        // }
+
+
+
+
+
 }
 
 /* End of file Pelanggan_model.php */

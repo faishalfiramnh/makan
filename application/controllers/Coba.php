@@ -11,9 +11,11 @@ class Coba extends CI_Controller
         parent::__construct();
         // $this->load->model('user_model');
         // $this->isLoggedIn();
-        // $this->load->model('Absensi_model');
+        $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper('url','date','form');
+        $this->load->model('BahanBakuModel');
+
 
     }
 
@@ -24,6 +26,8 @@ class Coba extends CI_Controller
 
     public function daftarUserBaru()
     {
+      // $nama = $this->input->post('nama');
+      // $pass = $this->input->post('password');
       $this->load->helper('url','form');
     $this->load->library('form_validation');
     $this->form_validation->set_rules('nama', 'nama', 'trim|required');
@@ -51,32 +55,44 @@ class Coba extends CI_Controller
 
             public function cekLoginCus()
           	{
+
+
+              $this->load->model('BarangJualModel');
+              $dataJual['jual'] = $this->BarangJualModel->ListBarangJual();
+              // $this->load->model('Pelanggan_model');
+              // $data['lihat'] = $this->BarangJualModel->ListBarangJual();
+
           		$this->load->helper('url','form');
           		$this->load->library('form_validation');
           		$this->form_validation->set_rules('nama','nama','trim|required');
           		$this->form_validation->set_rules('password','password','trim|required|callback_cekDb');
           		if ($this->form_validation->run() == FALSE)
           		{
-
           			$this->load->view('cus/cus_view_login');
           		} else
           		{
-          			$this->load->view('cus/homeCus');
+          			$this->load->view('cus/cus_view_masuk',$dataJual);
           		}
           	}
 
+
+
           	public function cekDb($password)
           	{
+               //$checking = $this->cuss->loginCus('pelanggan', array('nama' => $nama), array('password' => $password));
           		$this->load->model('Pelanggan_model');
           		$nama = $this->input->post('nama');
           		$result = $this->Pelanggan_model->loginCus($nama,$password);
-          		if($result)
+          		 if($result)
           		{
-          			$sess_array=array();
           			foreach ($result as $row )
           			{
+                  $session_data = array(
+                           'id_pel'   => $row->id_pel,
+                           'nama' => $row->nama,
+                           'password' => $row->password);
           				$sess_array=array('id_pel'=>$row->id_pel,'nama'=>$row->nama);
-          				$this->session->set_userdata('logged_in',$sess_array);
+          				$this->session->set_userdata($session_data);
           			}
           			return true;
           		}
@@ -89,10 +105,47 @@ class Coba extends CI_Controller
 
           	public function logout()
           	{
-          		$this->session->unset_userdata('logged_in');
-          		$this->session->sess_destroy();
-          		redirect('Coba','refresh');
+              $this->session->sess_destroy();
+              $sess_array = array('nama' => 'nama');
+              $this->session->unset_userdata('logged_in', $sess_array);
+              $data['message_display'] = 'Successfully Logout';
+              $this->load->view('Coba/loginUser', $data);
+
+
+            	// $this->session->unset_userdata('logged_in');
+          		// $this->session->sess_destroy();
+          		// redirect('Coba','refresh');
           	}
+
+            public function list()
+          {
+            $this->load->model('BarangJualModel');
+            $dataJual['jual']=$this->BarangJualModel->ListBarangJual();
+            $this->load->view('cus/BerhasilPesan', $dataJual);
+          }
+
+            public function pesanMakan()
+            {
+            $this->load->model('BarangJualModel');
+            $dataJual['jual'] = $this->BarangJualModel->ListBarangJual();
+            $this->load->helper('url','form');
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('jenisPaket', 'jenisPaket', 'trim|required');
+            //$data['lihat'] = $this->Pesan_model->ListBarangJual();
+            $this->load->model('Pesan_model');
+            if ($this->form_validation->run() == false)
+            {
+              $this->load->view('cus/cus_view_masuk',$dataJual);
+            }else{
+              $pesan = $this->input->post('NamaPaket');
+              $jml = $this->input->post('jumlah');
+              $dataJual['hehe'] = $pesan;
+              $this->Pesan_model->insertPesan();
+              //var_dump($_POST);
+              $this->load->view('cus/BerhasilPesan',$dataJual);
+            }
+
+            }
 }
 
 /* End of file Absensi.php */

@@ -14,7 +14,7 @@
   </head>
   <body>
 	<?php echo form_open('Coba/cekLoginCus'); ?>
-    <form class="form-signin">
+    <form class="form-signin" method="post">
           <div class="text-center mb-4">
             <img src="<?php echo base_url(); ?>frontend/foot.PNG" width="120" height="120">
             <h1 class="h3 mb-3 font-weight-normal">user masuk</h1>
@@ -22,13 +22,13 @@
           </div>
 
           <div class="form-label-group">
-            <input type="text" name="nama" id="nama" class="form-control" placeholder="Email address" required autofocus>
-            <label for="inputEmail">masukkan email</label>
+            <input type="text" name="nama" id="nama" class="form-control" placeholder="" required autofocus>
+            <label >masukkan nama</label>
           </div>
 
           <div class="form-label-group">
             <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-            <label for="inputPassword">Password</label>
+            <label>Password</label>
           </div>
 
           <div class="checkbox mb-3">
