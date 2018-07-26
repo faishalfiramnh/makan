@@ -1,16 +1,11 @@
-<?php /* <!doctype html>
-<html>
-    <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <style>
-            body{
-                padding: 15px;
-            }
-        </style>
-    </head>
-    <body>
-    */?>
+<?php
+$peralatanB=0;
+foreach ($peralatan_data as $peralatan) {
+  $peralatanB=$peralatanB+($peralatan->harga*$peralatan->jumlah);
+}
+$konvertAlat = number_format($peralatanB,0.3);
+
+?>
     <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -28,10 +23,10 @@
             </div>
             <div class="col-md-3 text-right">
                 <form action="<?php echo site_url('peralatan/index'); ?>" class="form-inline" method="get">
-                    <div class="input-group">
+                    <!-- <div class="input-group">
                         <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
-                            <?php 
+                            <?php
                                 if ($q <> '')
                                 {
                                     ?>
@@ -41,7 +36,7 @@
                             ?>
                           <button class="btn btn-primary" type="submit">Search</button>
                         </span>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
@@ -64,14 +59,14 @@
 			<td><?php echo $peralatan->jumlah ?></td>
 			<td><?php echo $peralatan->tgl_beli ?></td>
 			<td><?php echo $peralatan->harga ?></td>
-			<td><?php echo $peralatan->totalHarga ?></td>
+			<td><?php echo $peralatan->jumlah * $peralatan->harga; ?></td>
 			<td style="text-align:center" width="200px">
-				<?php 
-				echo anchor(site_url('peralatan/read/'.$peralatan->id_alat),'Read'); 
-				echo ' | '; 
-				echo anchor(site_url('peralatan/update/'.$peralatan->id_alat),'Update'); 
-				echo ' | '; 
-				echo anchor(site_url('peralatan/delete/'.$peralatan->id_alat),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				<?php
+				echo anchor(site_url('peralatan/read/'.$peralatan->id_alat),'Read');
+				echo ' | ';
+				echo anchor(site_url('peralatan/update/'.$peralatan->id_alat),'Update');
+				echo ' | ';
+				echo anchor(site_url('peralatan/delete/'.$peralatan->id_alat),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
 				?>
 			</td>
 		</tr>
@@ -79,13 +74,8 @@
             }
             ?>
         </table>
-        <div class="row">
-            <div class="col-md-6">
-                <a href="#" class="btn btn-primary">Total Record : <?php echo $total_rows ?></a>
-	    </div>
-            <div class="col-md-6 text-right">
-                <?php echo $pagination ?>
-            </div>
+        <div class="alert alert-success" role="alert">
+          Total harga seluruhnya : <?php echo $konvertAlat; ?>
         </div>
         </section>
     </div>

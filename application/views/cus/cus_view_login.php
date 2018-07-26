@@ -18,8 +18,7 @@
           <div class="text-center mb-4">
             <img src="<?php echo base_url(); ?>frontend/foot.PNG" width="120" height="120">
             <h1 class="h3 mb-3 font-weight-normal">user masuk</h1>
-            <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a></p>
-          </div>
+                      </div>
 
           <div class="form-label-group">
             <input type="text" name="nama" id="nama" class="form-control" placeholder="" required autofocus>

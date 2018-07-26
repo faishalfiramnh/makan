@@ -24,12 +24,12 @@ class Laporanlaba extends BaseController
         }
         else
         {
-            $this->load->model('user_model');       
+            $this->load->model('user_model');
             $data['roles'] = $this->user_model->getUserRoles();
 
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'laporanlaba/index.html?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'laporanlaba/index.html?q=' . urlencode($q);
@@ -54,12 +54,15 @@ class Laporanlaba extends BaseController
             'start' => $start,
         );
 //        $this->load->view('laporanlaba/laporanlaba_list', $data);
+        $this->load->model('Penjualan_model');
+        $data['lihat']=$this->Penjualan_model->totalJual();
+        $data['bahan']=$this->Penjualan_model->totalbahan();
         $this->global['pageTitle'] = 'Catering : Karyawan';
         $this->loadViews("laporanlaba/laporanlaba_list", $this->global, $data, NULL);
     }
     }
 
-    public function read($id) 
+    public function read($id)
     {
         $row = $this->Laporanlaba_model->get_by_id($id);
         if ($row) {
@@ -75,7 +78,7 @@ class Laporanlaba extends BaseController
         }
     }
 
-    public function create() 
+    public function create()
     {
         $data = array(
             'button' => 'Create',
@@ -86,8 +89,8 @@ class Laporanlaba extends BaseController
 	);
         $this->load->view('laporanlaba/laporanlaba_form', $data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         $this->_rules();
 
@@ -104,8 +107,8 @@ class Laporanlaba extends BaseController
             redirect(site_url('laporanlaba'));
         }
     }
-    
-    public function update($id) 
+
+    public function update($id)
     {
         $row = $this->Laporanlaba_model->get_by_id($id);
 
@@ -123,8 +126,8 @@ class Laporanlaba extends BaseController
             redirect(site_url('laporanlaba'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         $this->_rules();
 
@@ -141,8 +144,8 @@ class Laporanlaba extends BaseController
             redirect(site_url('laporanlaba'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Laporanlaba_model->get_by_id($id);
 
@@ -156,7 +159,7 @@ class Laporanlaba extends BaseController
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {
 	$this->form_validation->set_rules('idLabaBersih', 'idlababersih', 'trim|required');
 	$this->form_validation->set_rules('idLabaKotor', 'idlabakotor', 'trim|required');

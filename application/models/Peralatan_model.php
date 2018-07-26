@@ -28,7 +28,7 @@ class Peralatan_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
-    
+
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('id_alat', $q);
@@ -36,7 +36,7 @@ class Peralatan_model extends CI_Model
 	$this->db->or_like('jumlah', $q);
 	$this->db->or_like('tgl_beli', $q);
 	$this->db->or_like('harga', $q);
-	$this->db->or_like('totalHarga', $q);
+	// $this->db->or_like('totalHarga', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -49,7 +49,7 @@ class Peralatan_model extends CI_Model
 	$this->db->or_like('jumlah', $q);
 	$this->db->or_like('tgl_beli', $q);
 	$this->db->or_like('harga', $q);
-	$this->db->or_like('totalHarga', $q);
+	// $this->db->or_like('totalHarga', $q);
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

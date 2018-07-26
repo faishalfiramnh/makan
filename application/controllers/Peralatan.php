@@ -24,12 +24,12 @@ class Peralatan extends BaseController
         }
         else
         {
-            $this->load->model('user_model');       
+            $this->load->model('user_model');
             $data['roles'] = $this->user_model->getUserRoles();
 
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'peralatan/index.html?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'peralatan/index.html?q=' . urlencode($q);
@@ -59,7 +59,7 @@ class Peralatan extends BaseController
     }
     }
 
-    public function read($id) 
+    public function read($id)
     {
         $row = $this->Peralatan_model->get_by_id($id);
         if ($row) {
@@ -69,7 +69,6 @@ class Peralatan extends BaseController
 		'jumlah' => $row->jumlah,
 		'tgl_beli' => $row->tgl_beli,
 		'harga' => $row->harga,
-		'totalHarga' => $row->totalHarga,
 	    );
             $this->load->view('peralatan/peralatan_read', $data);
         } else {
@@ -78,7 +77,7 @@ class Peralatan extends BaseController
         }
     }
 
-    public function create() 
+    public function create()
     {
         $data = array(
             'button' => 'Create',
@@ -88,12 +87,11 @@ class Peralatan extends BaseController
 	    'jumlah' => set_value('jumlah'),
 	    'tgl_beli' => set_value('tgl_beli'),
 	    'harga' => set_value('harga'),
-	    'totalHarga' => set_value('totalHarga'),
 	);
         $this->load->view('peralatan/peralatan_form', $data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         $this->_rules();
 
@@ -105,7 +103,7 @@ class Peralatan extends BaseController
 		'jumlah' => $this->input->post('jumlah',TRUE),
 		'tgl_beli' => $this->input->post('tgl_beli',TRUE),
 		'harga' => $this->input->post('harga',TRUE),
-		'totalHarga' => $this->input->post('totalHarga',TRUE),
+
 	    );
 
             $this->Peralatan_model->insert($data);
@@ -113,8 +111,8 @@ class Peralatan extends BaseController
             redirect(site_url('peralatan'));
         }
     }
-    
-    public function update($id) 
+
+    public function update($id)
     {
         $row = $this->Peralatan_model->get_by_id($id);
 
@@ -127,7 +125,7 @@ class Peralatan extends BaseController
 		'jumlah' => set_value('jumlah', $row->jumlah),
 		'tgl_beli' => set_value('tgl_beli', $row->tgl_beli),
 		'harga' => set_value('harga', $row->harga),
-		'totalHarga' => set_value('totalHarga', $row->totalHarga),
+
 	    );
             $this->load->view('peralatan/peralatan_form', $data);
         } else {
@@ -135,8 +133,8 @@ class Peralatan extends BaseController
             redirect(site_url('peralatan'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         $this->_rules();
 
@@ -148,7 +146,7 @@ class Peralatan extends BaseController
 		'jumlah' => $this->input->post('jumlah',TRUE),
 		'tgl_beli' => $this->input->post('tgl_beli',TRUE),
 		'harga' => $this->input->post('harga',TRUE),
-		'totalHarga' => $this->input->post('totalHarga',TRUE),
+
 	    );
 
             $this->Peralatan_model->update($this->input->post('id_alat', TRUE), $data);
@@ -156,8 +154,8 @@ class Peralatan extends BaseController
             redirect(site_url('peralatan'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Peralatan_model->get_by_id($id);
 
@@ -171,13 +169,13 @@ class Peralatan extends BaseController
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {
 	$this->form_validation->set_rules('nama_alat', 'nama alat', 'trim|required');
 	$this->form_validation->set_rules('jumlah', 'jumlah', 'trim|required');
 	$this->form_validation->set_rules('tgl_beli', 'tgl beli', 'trim|required');
 	$this->form_validation->set_rules('harga', 'harga', 'trim|required');
-	$this->form_validation->set_rules('totalHarga', 'totalharga', 'trim|required');
+
 
 	$this->form_validation->set_rules('id_alat', 'id_alat', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

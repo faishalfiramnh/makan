@@ -26,8 +26,8 @@ class Coba extends CI_Controller
 
     public function daftarUserBaru()
     {
-      // $nama = $this->input->post('nama');
-      // $pass = $this->input->post('password');
+      $this->load->model('BarangJualModel');
+      $dataJual['jual'] = $this->BarangJualModel->ListBarangJual();
       $this->load->helper('url','form');
     $this->load->library('form_validation');
     $this->form_validation->set_rules('nama', 'nama', 'trim|required');
@@ -42,7 +42,7 @@ class Coba extends CI_Controller
     {
 
         $this->Pelanggan_model->insertUser();
-        $this->load->view('cus/cus_view_masuk');
+        $this->load->view('cus/cus_view_masuk',$dataJual);
 
     }
 

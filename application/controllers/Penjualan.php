@@ -24,12 +24,12 @@ class Penjualan extends BaseController
         }
         else
         {
-            $this->load->model('user_model');       
+            $this->load->model('user_model');
             $data['roles'] = $this->user_model->getUserRoles();
 
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'penjualan/index.html?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'penjualan/index.html?q=' . urlencode($q);
@@ -55,11 +55,12 @@ class Penjualan extends BaseController
         );
 //        $this->load->view('penjualan/penjualan_list', $data);
         $this->global['pageTitle'] = 'Catering : Karyawan';
+        $data['lihat']=$this->Penjualan_model->tampiljual();
         $this->loadViews("penjualan/penjualan_list", $this->global, $data, NULL);
     }
     }
 
-    public function read($id) 
+    public function read($id)
     {
         $row = $this->Penjualan_model->get_by_id($id);
         if ($row) {
@@ -79,7 +80,7 @@ class Penjualan extends BaseController
         }
     }
 
-    public function create() 
+    public function create()
     {
         $data = array(
             'button' => 'Create',
@@ -94,8 +95,8 @@ class Penjualan extends BaseController
 	);
         $this->load->view('penjualan/penjualan_form', $data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         $this->_rules();
 
@@ -116,8 +117,8 @@ class Penjualan extends BaseController
             redirect(site_url('penjualan'));
         }
     }
-    
-    public function update($id) 
+
+    public function update($id)
     {
         $row = $this->Penjualan_model->get_by_id($id);
 
@@ -139,8 +140,8 @@ class Penjualan extends BaseController
             redirect(site_url('penjualan'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         $this->_rules();
 
@@ -161,8 +162,8 @@ class Penjualan extends BaseController
             redirect(site_url('penjualan'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Penjualan_model->get_by_id($id);
 
@@ -176,7 +177,7 @@ class Penjualan extends BaseController
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {
 	$this->form_validation->set_rules('idPelanggan', 'idpelanggan', 'trim|required');
 	$this->form_validation->set_rules('NamaBarang', 'namabarang', 'trim|required');
@@ -187,6 +188,13 @@ class Penjualan extends BaseController
 
 	$this->form_validation->set_rules('id_transaksi', 'id_transaksi', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    }
+
+    public function totalPenjualan()
+    {
+      $this->load->model('Penjualan_model');
+      $sumKon['lihat']=$this->Penjualan_model->totalJual();
+      $this->load->view('laporanlaba/laporanlaba_list', $sumKon);
     }
 
 }

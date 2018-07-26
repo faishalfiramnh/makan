@@ -1,16 +1,23 @@
-<?php /* <!doctype html>
-<html>
-    <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <style>
-            body{
-                padding: 15px;
-            }
-        </style>
-    </head>
-    <body>
-    */?>
+
+    <?php
+      $pengeluaran=0;
+      $penjualan=0;
+      foreach ($lihat as $laporanlaba)
+      {
+         $penjualan=$laporanlaba->totJual;
+      }
+
+      foreach ($bahan as $key) {
+        $pengeluaran=$pengeluaran+($key->hargasatuan*$key->jumlah);
+      }
+
+      $formatPenjualan = number_format($penjualan,0.3);
+      $formatPengeluaran = number_format($pengeluaran,0.3);
+
+      $labaBersih = $penjualan - $pengeluaran;
+      $formatLabBersih = number_format($labaBersih,0.3);
+
+     ?>
     <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -31,7 +38,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
-                            <?php 
+                            <?php
                                 if ($q <> '')
                                 {
                                     ?>
@@ -48,30 +55,19 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>IdLabaBersih</th>
-		<th>IdLabaKotor</th>
+		<th>total penjualan</th>
+		<th>total pengeluaran bahan baku</th>
+    <th>keuntungan saat ini</th>
 		<th>Action</th>
-            </tr><?php
-            foreach ($laporanlaba_data as $laporanlaba)
-            {
-                ?>
-                <tr>
+      </tr>
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $laporanlaba->idLabaBersih ?></td>
-			<td><?php echo $laporanlaba->idLabaKotor ?></td>
+			<td><?php echo $formatPenjualan?></td>
+			<td><?php echo $formatPengeluaran ?></td>
+      <td><?php echo $formatLabBersih ?></td>
 			<td style="text-align:center" width="200px">
-				<?php 
-				echo anchor(site_url('laporanlaba/read/'.$laporanlaba->idLabaRugi),'Read'); 
-				echo ' | '; 
-				echo anchor(site_url('laporanlaba/update/'.$laporanlaba->idLabaRugi),'Update'); 
-				echo ' | '; 
-				echo anchor(site_url('laporanlaba/delete/'.$laporanlaba->idLabaRugi),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
-				?>
+
 			</td>
 		</tr>
-                <?php
-            }
-            ?>
         </table>
         <div class="row">
             <div class="col-md-6">

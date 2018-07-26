@@ -17,7 +17,7 @@
         <h2 style="margin-top:0px">Penjualan List</h2>
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <!-- <?php echo anchor(site_url('penjualan/create'),'Create', 'class="btn btn-primary"'); ?> -->
+                <?php echo anchor(site_url('BrngJualCont/tambah'),'tambah paket jual makananx', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -45,31 +45,35 @@
                 </form>
             </div>
         </div>
+
+
+
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>IdPelanggan</th>
-		<th>Nama </th>
-		<th>Nama Paket yang dipesan</th>
-		<th>jumlah </th>
-		<th>Harga Total</th>
 
-		<th>Action</th>
+            		<th>Nama </th>
+            		<th>Nama Paket yang dipesan</th>
+            		<th>harga seluruhnya </th>
+            		<th>jumlahnya</th>
+            		<th>Action</th>
   </tr><?php foreach ($lihat as $key){?>
+    <td><?php echo $key->idJual ?></td>
+    <td><?php echo $key->nama ?></td>
     <td><?php echo $key->jenisPaket ?></td>
-    <td><?php echo $key->NamaPaket ?></td>
+    <td><?php echo $key->harga ?></td>
     <td><?php echo $key->jumlah ?></td>
     <!-- <td><?php echo $penjualan->hargaSatuan ?></td>
     <td><?php echo $penjualan->totalPenjualan ?></td>
     <td><?php echo $penjualan->tanggal ?></td> -->
     <td style="text-align:center" width="200px">
-      <?php
+      <!-- <?php
       echo anchor(site_url('penjualan/read/'.$penjualan->id_transaksi),'Read');
       echo ' | ';
       echo anchor(site_url('penjualan/update/'.$penjualan->id_transaksi),'Update');
       echo ' | ';
       echo anchor(site_url('penjualan/delete/'.$penjualan->id_transaksi),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
-      ?>
+      ?> -->
     </td>
   </tr>
 <?php  }?>

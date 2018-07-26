@@ -71,8 +71,8 @@
                         <li><a href="#">Tentang Kita</a></li>
                         <li><a href="#">Pelayanan</a></li>
                         <li><a href="#">Blog</a></li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Kontak kami</a></li>
+                        <li><a href="<?php echo base_url(); ?>Coba/loginUser">login</a></li>
+                        <li><a href="">Kontak kami</a></li>
                         <li><a href="<?php echo base_url(); ?>Coba/daftarUserBaru">daftar</a></li>
                     </ul>
                 </div>

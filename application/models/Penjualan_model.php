@@ -15,6 +15,12 @@ class Penjualan_model extends CI_Model
         parent::__construct();
     }
 
+    function tampiljual()
+    {
+      $query = $this->db->query("SELECT * FROM jual");
+      return $query->result();
+    }
+
     // get all
     function get_all()
     {
@@ -28,7 +34,7 @@ class Penjualan_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
-    
+
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('id_transaksi', $q);
@@ -75,6 +81,24 @@ class Penjualan_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
+    public function totalJual()
+    {
+      // $this->db->select('SUM(harga) as totJual');
+      // $this->db->from('jual');
+
+      $query = $this->db->query("SELECT SUM(harga) as totJual FROM jual");
+      return $query->result();
+
+    }
+
+    public function totalbahan()
+    {
+      $query = $this->db->query("SELECT * FROM bahanbaku");
+      return $query->result();
+
+    }
+
+
 
 }
 
