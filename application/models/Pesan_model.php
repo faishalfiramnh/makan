@@ -8,7 +8,7 @@ class Pesan_model extends CI_Model
 public function insertPesan(){
 
     $bahan=array(
-       'nama'=>$this->input->post('nama'),
+       'nama'=> $this->input->post('name'),
        'jenisPaket'=>$this->input->post('jenisPaket'),
        'harga'=>$this->input->post('total'),
        'jumlah'=>$this->input->post('jumlah')

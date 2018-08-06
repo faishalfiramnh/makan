@@ -50,6 +50,8 @@
         <?php echo form_open_multipart('Coba/pesanMakan'); ?>
               <?php echo validation_errors(); ?>
 
+              <input type="hidden" name="name" value="<?= $this->session->userdata('nama') ?>">
+
               <div class="form-group form-group-margin">
                   <label for="inputPasswordConfirm" class="control-label no-mobile-display">jumlah </label>
                   <input id="jumlah" class="form-control" type="text" name="jumlah" value="" placeholder="" onchange="faisal()">
